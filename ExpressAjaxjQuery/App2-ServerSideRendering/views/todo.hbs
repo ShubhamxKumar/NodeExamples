@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/todos" method="POST">
+    <!-- What it does is that when submitted it will send a post request to '/todos',  -->
+    <!-- remember that we have to use root url relative path here -->
+        <input name="newtodo">
+        <input type="submit">
+    </form>
+    <ul>
+        <!-- This is a hbs syntax what it does is some what similar to for loop, for each item in 'todos' array, it run --> 
+        <!-- that code between the double brackets notation -> double brackets notation code -->
+        <!-- Anything dynamic we want to enter we have to do that in double brackets notation notation, this code here will run on every -->
+        <!-- item in "todos" list and print the task property in it. -->
+        {{#each todos as |todo|}}
+        <li>{{todo.task}}</li>
+        {{/each}}
+    </ul>
+</body>
+</html>
