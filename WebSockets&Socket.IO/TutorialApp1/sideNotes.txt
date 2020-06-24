@@ -1,0 +1,50 @@
+WEB SOCKETS 
+Standard http protocols does the following thing:
+First the client will find a path to the server, so as to send a request, and then ask server if it is ready to accept requests 
+or not, if yes then the client send request via the path formed and then server send back the response,
+But the downside is that server can't initiate the conversation, it can only like send back a response to the client.
+EXAMPLE: client is "you" and server is your 'crush', where you initiate the conversation and she only replies, when she feels like
+
+But once the response is recieved the path is destroyed and hence for sending the request again the whole upper procedure 
+needs to be followed again.
+
+HOW DOES WEB SOCKETS SOLVE THIS:
+Web Sockets is a technology that has a protocol that is slightly different from regular HTTP protocols, but web Sockets can run
+over http, Like if you have a server running at PORT:80 then web sockets can also run on the same port, browsers supports 
+web sockets using JS implementaion, browsers have web sockets API.
+
+Now if we send a request from client to the server then what will happen is that a tunnel/pipeline like structures will be created 
+between server and the client, hence when we send req again the whole path finding process is not done, because there is 
+already a tunnel/pipeline created, hence WEB SOCKETS are FASTER than normal HTTP, 
+These tunnel/pipelines remain there until the client closes the browser or go to a different website ot the server restarts or crashes.
+So this way server can send data into the tunnel/pipeline and the client will get it and vice-versa.
+
+WEB SOCKETS can be implemented by a library called SOCKET.IO, it's a famous nodeJS library, and it helps to create these tunnel/pipelines
+for communication, it has some methods, like if there is a tunnel/pipeline and A and B are on each side of it, then A can send data 
+to B using "emit()" function of A, and B will get the data inside the body of the "on()" function of B. Similarly vice versa.
+
+
+WHAT IS AND HOW SOCKET.IO AND SOCKETS WORK
+
+When we created a io instance of, what happened was that on the server a interface was created called as "io", through which 
+all the socket connection happens, so whenever the client calls 'io()' function it creates a socekt connection from itself to 
+the server(as we have created in the script.js file of the front end), and this function returns a object called "socket"
+object thats why we store it in a variable, this socket is nothing but the pipeline, so whenever the client side runthe function
+it creates this object or pipeline, 
+So if we open two tabs in the same browser, the server does not know that wether they are same or different, it treats them
+like saperate clients, lets call tab1 as "C1" and tab2 as "C2", so when we visit the url "localhost:port/" in this case 
+port = 8000, then there gets two pipelines created from server to C1, and server to C2. BBoth pipelines have different id's
+so the peice of code that we wrote on the index.js file 
+
+io.on('connection', function(socket) {
+    socket.emit('event_name');
+})
+
+this means whenever the server detects a new client it creates a pipeline for that client.
+
+So whenever the server detects a connection, a copy of the function function(socket){} is run, but note that 
+the function that ran on the connection of C1 and C2 are completely different function though they are the copy of the same 
+function.
+
+So whenever the connection is made the pipeline(socekt) is reffered through socket object both from the client side and server
+side. 

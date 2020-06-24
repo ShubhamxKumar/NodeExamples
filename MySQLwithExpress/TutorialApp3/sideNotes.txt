@@ -1,0 +1,91 @@
+jQuery RELATED NOTES: 
+never download .min version of jquery, becuase then it will not contain ajax functions.
+
+IMPORTANT:
+When in server.js, I commented out the the snippet "server.use('/api', require('./route/API/index.js').route)"
+the database did not synchronized, this means that in order to sync database we have to import it in a file 
+which which is directly or indirectly imported and used in entrypoint js file.
+In this case we are importing db.js in route/API/users.js && route/API/products.js which are being used in route/API/index.js
+which in turn is being imported in server.js(entrypoint js file).
+
+
+
+
+
+
+DATABASE RELATED NOTES 
+
+In this application we using a ORM(Object Relational Mapping) called Sequelize to work with MySQL
+ORM are used to interact with database by creating models and then creating objects based on that model
+and then work with them rather than writing long queries in the form of strings we can just use some
+functions to add update and change data in MySQL
+
+First of all install sequelize and then install mysql2 because we need to define with which database we need to use this ORM
+becuase sequelize is a ORM for many sql based databases like MySQL, postgres and etc.
+
+Please refer to sequelize official website for more information...
+
+TO SYNC DATABASE
+db.sync().then(function(){
+    console.log('DataBase is synced');
+}).catch(function(err){
+    console.log('Could not connect to the database....');
+})
+
+
+what this does is that it will create the table that we defined in the models we created if not already created 
+-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x
+
+To create a connection: 
+const db = new sequelize('shopdb', 'shopper', 'shoppass', {
+    host: 'localhost',
+    dialect: 'mysql',
+    pool: {
+        min:0,
+        max: 5,
+    }
+})
+1. sequelize('name of the database', 'name of the user', 'user password', {
+    host: takes the name of the host
+    dialect: takes the type of the database we are going to use 
+    pool: {
+        min: takes the minimum amount of connections to the database
+        max: define the maximum amount of connection to the database
+    }
+})
+x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+ 
+TO CREATE A model
+
+const User = db.define('users', {
+    id: {
+        type: sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    name:{
+        type: sequelize.STRING,
+        allowNull:false,
+    }
+})
+
+Here the model name is User
+and it will create  a table 'users' with the following feilds : id, name,
+and the feilds will have the following properties .
+ANd this Model is then exported .
+Then we can import the file where we need to perform the operations 
+like:
+const User = require('../../db').User;
+and then through the User const we can perform operations on the table.
+
+x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x
+
+TO QUERY ON THE DATA BASE 
+User.findAll().then(function(response){}).cathc(function(err){
+        res.status(500).send({
+            error:'Could not find any user in the database'
+        })
+    })
+
+here .findAll function will find all the user in the database and return it, it works on the concept of promise 
+we can also provide a where clause, which will find the users on the basis of certain conditions .    

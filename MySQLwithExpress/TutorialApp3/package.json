@@ -1,0 +1,20 @@
+{
+  "name": "tutorialapp3",
+  "version": "1.0.0",
+  "description": "Ecommerce site with Express SQL jQuery with Love",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Timothy",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "hbs": "^4.1.1",
+    "mysql2": "^2.1.0",
+    "path": "^0.12.7",
+    "sequelize": "^5.21.12"
+  }
+}

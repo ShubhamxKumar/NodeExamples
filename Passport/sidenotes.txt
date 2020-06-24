@@ -1,0 +1,2 @@
+In Passport we first need to define some strategies, like given a username or password how do we know that a user credentials are correct or not.
+Passport uses sessions, that when the client logs in, some client related data gets saved in form of cookies 

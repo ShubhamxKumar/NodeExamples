@@ -1,5 +1,5 @@
 // we use $ to access jquery, $ means jquery function
-// $ function is a async function, so whatever we write in () after jquery is like a call back async function
+// '$' function is a async function, so whatever we write in () after jquery is like a call back async function
 // fascinating thing is that it runs after the page is completely loaded
 
 

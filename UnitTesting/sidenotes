@@ -1,0 +1,9 @@
+Software testing is automated way of keeping your project tested, like if you douchebags are working on a big project, and some stupid asshole wrote a code and contributed after which an existing feature get broken or something, first of all you don't want that to happen, second if that happens straight away throw that gut off the roof, he is the real asshole.
+
+Unit testing comes under Software Testing.
+
+In this tutorial we are using testing frameworks like Chaijs, MochaJS, yeah I know beverages, mostly these two are used together.
+
+we are also using nyc, which helps us to implement code coverage, it is a thing which tells us which part of code was tested and which part of the code was not tested, for this app run 'npm run cover', to run nyc, view package.json, for more scripts like this.
+
+In the 'cover' script we have the command 'nyc --reporter=html --reporter=text mocha', right when we run the script in the terminal, then it runs nyc which in turn runs mocha, which is used for testing code. The --reprter is the type of report you want, =text will show you the reports in the terminal, and =html will create a folder called coverage in the root directory with a index.html file, it will give you a detail report a webpage, with the list of files, and on clicking on a file you will see the code, the code in green is the code which has been tested, and the code in yellow is the code which has not been tested, so you know which snippets were tested during the automated test, and which snippets were not tested so that you can include thme in your test file so they can also be tested.  
